@@ -1,0 +1,25 @@
+VS CODE EXTENSIONS
+
+Pylance
+Pylint
+Python
+Python Debugger
+Python Environments
+
+PYCHARM
+встроенные расширения для Python
+
+Нейронки
+
+Без ВПН
+- Зарегаться на routerai.ru
+- Скачать расширение Continue (Pycharm) Roo Code(VS Code)
+- API Provider - OpenAI Compatible
+- Base URL + API Key + Model ID
+
+С ВПН
+- зарегаться на claude.ai
+- купить номер для регистрации
+- скачать nodejs
+- установить десктопный клод
+- подключить mcp filesystem
