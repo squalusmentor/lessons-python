@@ -39,24 +39,6 @@ class Config:
         return cls._instance
 
 
-# --- Синглтон через декоратор (замыкание из B1 в деле) ---
-def singleton(cls):
-    instances = {}
-
-    def get_instance(*args, **kwargs):
-        if cls not in instances:
-            instances[cls] = cls(*args, **kwargs)
-        return instances[cls]
-
-    return get_instance
-
-
-@singleton
-class Logger:
-    def __init__(self):
-        self.lines = []
-
-
 def demo7():
     print("-- фабрика: classmethod как альтернативный конструктор --")
     data = {"name": "Отвёртка", "quantity": 7}
@@ -76,11 +58,6 @@ def demo7():
     a.settings["debug"] = True
     print("  a is b:", a is b)             # один и тот же объект
     print("  b.settings:", b.settings)     # изменение видно через b
-
-    print("-- синглтон через декоратор --")
-    l1 = Logger()
-    l2 = Logger()
-    print("  l1 is l2:", l1 is l2)
 
     print("-- почему синглтон ОСТОРОЖНО --")
     print("  плюс: один общий ресурс (конфиг, пул соединений, лог).")
