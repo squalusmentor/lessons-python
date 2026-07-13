@@ -1,0 +1,9 @@
+# Зависимости урока B7 (базы данных через асинхронные драйверы и ORM)
+
+# Асинхронные драйверы (сырой SQL, блок 1)
+aiosqlite>=0.19        # async-драйвер SQLite
+asyncpg>=0.29          # async-драйвер PostgreSQL
+
+# ORM (блок 2). sqlalchemy[asyncio] тянет greenlet, нужный для async-движка
+sqlalchemy[asyncio]>=2.0
+pydantic[email]>=2.0
