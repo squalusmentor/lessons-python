@@ -1,30 +1,30 @@
-import importlib.util
-from pathlib import Path
+"""Точка входа приложения.
+
+Здесь живёт ровно две вещи:
+1) создание объекта FastAPI (`app`) и подключение роутеров;
+2) запуск сервера (uvicorn).
+
+Никакой бизнес-логики тут быть не должно — она в хендлерах и сервисах.
+"""
+
+import uvicorn
+from fastapi import FastAPI
+
+from source.routers.users import router as users_router
 
 
-def _load(filename: str):
-    """Файлы начинаются с цифры — обычным import их не подключить.
-    Грузим модуль напрямую по пути через importlib."""
-    path = Path(__file__).parent / filename
-    spec = importlib.util.spec_from_file_location(path.stem, path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+app = FastAPI(title="Users API — урок B2")
 
 
-# Раскомментируй нужную строку и запусти: python main.py
+@app.get("/")
+async def root():
+    """Корневой эндпоинт — просто подсказка, куда идти за документацией."""
+    return {"message": "Users API. Документация: /docs"}
 
-# --- Занятие 1. Инкапсуляция, наследование, полиморфизм, dunder ---
-_load("01_classes_encapsulation.py").demo1()        # классы и инкапсуляция
-# _load("02_inheritance.py").demo2()                # наследование, super()
-# _load("03_polymorphism.py").demo3()               # полиморфизм и утиная типизация
-# _load("04_dunder.py").demo4()                     # dunder-методы
 
-# --- Занятие 2. property, композиция vs наследование, паттерны ---
-# _load("05_property.py").demo5()                   # property
-# _load("06_composition_vs_inheritance.py").demo6() # композиция против наследования
-# _load("07_patterns.py").demo7()                   # паттерны: фабрика, синглтон
+# Подключаем роутер пользователей: все его пути получат префикс /users
+app.include_router(users_router, prefix="/users", tags=["Users"])
 
-# --- Практики запускай напрямую: ---
-#   python practice_inventory_part1.py
-#   python practice_inventory_part2.py
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)

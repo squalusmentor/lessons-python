@@ -1,0 +1,7 @@
+# Зависимости урока B5 (телеграм-бот на aiogram)
+
+aiogram==3.27.0          # фреймворк бота: роутеры, фильтры, FSM, клавиатуры
+sqlalchemy[asyncio]>=2.0 # ORM; extra asyncio тянет greenlet для async-движка
+aiosqlite>=0.19          # async-драйвер SQLite — не блокирует event loop
+python-dotenv>=1.0.0     # чтение BOT_TOKEN из .env
+loguru==0.7.3            # логи

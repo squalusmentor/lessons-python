@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 def _load(filename: str):
-    """Файлы начинаются с цифры — обычным import их не подключить.
+    """Файлы начинаются с цифры -- обычным import их не подключить.
     Грузим модуль напрямую по пути через importlib."""
     path = Path(__file__).parent / filename
     spec = importlib.util.spec_from_file_location(path.stem, path)
@@ -12,18 +12,16 @@ def _load(filename: str):
     return module
 
 
-# Раскомментируй нужный блок и запусти: python main.py
+# Раскомментируй нужную строку и запусти: python main.py
 
-# --- Блок 1. Функции вглубь ---
-_load("01_args_kwargs.py").demo1()      # *args / **kwargs
-# _load("02_scope.py").demo2()          # область видимости (LEGB)
-# _load("03_closures.py").demo3()       # замыкания
-# _load("04_first_class.py").demo4()    # функции как объекты первого класса
+# --- Блок 1. Основы asyncio (сеть не нужна) ---
+_load("01_coroutines.py").demo1()            # корутины, await, asyncio.run
+# _load("02_event_loop.py").demo2()          # event loop: sequential vs gather, create_task
+# _load("03_blocking_vs_await.py").demo3()   # ловушка: time.sleep вешает весь loop
 
-# --- Блок 2. Рекурсия ---
-# _load("05_recursion.py").demo5()      # рекурсия
-# _load("06_recursion_tasks.py").demo6()  # задачи на рекурсию (стабы)
+# --- Блок 2. Асинхронный I/O на aiohttp (нужен интернет) ---
+# _load("04_sync_vs_async_requests.py").demo4()      # requests против aiohttp: замер времени
+# _load("05_parallel_request_and_ticks.py").demo5()  # запрос к сайту параллельно с тиками
+# _load("06_run_in_executor.py").demo6()             # run_in_executor: поток (и процесс)
 
-# --- Практики запускай напрямую: ---
-#   python practice_weather.py
-#   python practice_tree.py
+# --- Практика: смотри to-do.md ---
